@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des médias disponibles</title>
+</head>
+<body>
+
+<h2> Liste des médias dispo </h2>
+
+<ul>
+  {% for media in medias %}
+    <li> {{media.titre}} - {{media.auteur}} </li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
