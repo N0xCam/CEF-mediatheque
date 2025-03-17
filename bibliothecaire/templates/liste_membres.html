@@ -2,17 +2,19 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste Membres</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Membres</title>
 </head>
 <body>
 
 <h2> Liste des membres </h2>
 
 <ul>
-   test
-</ul>
+    {% for Membre in Membres %}
+        <li> {{Membre.nom}} - {{Membre.email}} </li>
 
-<a href="{% url 'ajouter_membre' %}"> Ajouter un membre </a>
+    {% endfor %}
+</ul>
 
 </body>
 </html>

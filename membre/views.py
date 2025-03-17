@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from bibliothecaire.models import Media
+from bibliothecaire.models import Membre
 
-def liste_medias(request):
-    medias = Media.objects.filter(disponible=True)
-    return render(request, 'membre/liste_medias.html', {'medias' : medias})
+def liste_membres(request):
+    Membre = Membre.objects.filter(disponible=True)
+    return render(request, 'membre/liste_membre.html', {'membre' : membres})
 
 # Create your views here.
