@@ -32,4 +32,4 @@ class Emprunt(models.Model):
 
     def __str__(self):
         return f" {self.membre} a emprunté {self.media}"
-# Create your models here.
+
