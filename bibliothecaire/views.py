@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Membre
+from .models import Membre, Media
 from .forms import MembreForm
 
 
@@ -16,3 +16,7 @@ def ajouter_membre(request):
     else: form = MembreForm()
 
     return render(request, 'ajouter_membre.html', {'form' : form})
+
+def liste_medias(request):
+    medias = Media.objects.all()
+    return render (request, 'liste_medias.html', {'media' : medias})
