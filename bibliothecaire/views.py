@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Membre, Media
-from .forms import MembreForm
+from .forms import MembreForm, MediaForm
 
 
 def liste_membres(request):
@@ -20,3 +20,11 @@ def ajouter_membre(request):
 def liste_medias(request):
     medias = Media.objects.all()
     return render (request, 'liste_medias.html', {'media' : medias})
+
+def ajouter_media(request):
+    if request.method == "POST":
+        form = MediaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_media')
+    else: form = MediaForm()
