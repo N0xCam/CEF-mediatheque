@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import liste_membres, ajouter_membre, liste_medias, ajouter_media
 
-
+app_name = "bibliothecaire"
 
 urlpatterns = [
     path('membres/', liste_membres, name='liste_membres'),

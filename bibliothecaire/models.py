@@ -22,7 +22,7 @@ class Media(models.Model):
     disponible = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.titre
+        return f" {self.titre} - {self.auteur})"
 
 #Modèle Emprunt
 class Emprunt(models.Model):
