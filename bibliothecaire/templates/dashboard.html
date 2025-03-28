@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tableau de bord Bibliothécaire</title>
+</head>
+<body>
+
+<h2> Bienvenue, Bibliothécaire</h2>
+
+<nav>
+    <ul>
+        <li> <a href="{% url 'bibliothecaire:liste_medias' %}">liste des médias </a> </li>
+        <li> <a href="{% url 'bibliothecaire:ajouter_media' %}">ajouter médias </a> </li>
+        <li> <a href="{% url 'bibliothecaire:liste_membres' %}">liste des membres</a> </li>
+        <li> <a href="{% url 'bibliothecaire:ajouter_membre' %}">ajouter membre </a> </li>
+    </ul>
+</nav>
+
+<p> Utilisez le menu pour gérer les livres et les membres </p>
+</body>
+</html>

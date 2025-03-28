@@ -1,8 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Membre, Media
 from .forms import MembreForm, MediaForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
+def dashboard_admin(request):
+    return render(request, 'membre_dashboard.html')
 
+@login_required
+def dashboard_membre(request):
+    return render(request, 'membres/membre_dashboard.html')
 
 def liste_membres(request):
     membres = Membre.objects.all()

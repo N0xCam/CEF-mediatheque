@@ -10,11 +10,13 @@
 <h2> Liste des membres </h2>
 
 <ul>
-    {% for Membre in Membres %}
-        <li> {{Membre.nom}} - {{Membre.email}} </li>
+    {% for membre in membres %}
+        <li> {{membre.nom}} - {{membre.email}} </li>
 
     {% endfor %}
 </ul>
 
 </body>
 </html>
+
+
