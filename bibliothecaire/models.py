@@ -1,4 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+#Rôles utilisateur
+class CustomUser (AbstractUser):
+    ROLE_CHOICES = [
+        ('membre', 'Membre'),
+        ('bibliothecaire', 'Bibliothecaire'),
+    ]
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='membre')
 
 # Modèle Membre
 class Membre(models.Model):
@@ -14,6 +23,7 @@ class Media(models.Model):
     TYPE_CHOICES = [
         ('livre', 'Livre'),
         ('dvd', 'Dvd'),
+        ('cd', 'Cd'),
         ('jeu de plateau', "Jeu de Plateau")
     ]
     titre = models.CharField(max_length=255)

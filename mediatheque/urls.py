@@ -10,4 +10,5 @@ urlpatterns = [
     path('', views.accueil, name='accueil'),
     path('dashboard/', views.dashboard_membre, name="dashboard"),
     path('connexion/', views.accueil, name='connexion'),
+
 ]
