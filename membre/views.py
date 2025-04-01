@@ -1,13 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from bibliothecaire.models import Membre
+from bibliothecaire.models import Media
 
-@login_required
-def dashboard_membre(request):
-    return render(request, 'membres/membre_dashboard.html')
-
-def liste_membres(request):
-    membre = Membre.objects.filter(disponible=True)
-    return render(request, 'liste_medias.html', {'membre' : membre})
+def liste_medias(request):
+    medias = Media.objects.all()
+    return render(request, 'liste_medias.html', {'medias' : medias})
 
 # Create your views here.

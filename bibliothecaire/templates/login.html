@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tableau de bord - Membre</title>
-</head>
+    <title>Connexion</title>
 <body>
 
-<h2> Bienvenue, cher Membre !</h2>
 
-<nav>
-  <ul>
-    <li> test</li>
-  </ul>
-</nav>
+<form method="post">
 
-<p> Explorez la bibliothèque et empruntez des livres</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+  <button type="submit"> Se connecter </button>
+</form>
+
 
 </body>
 </html>

@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'membre',
 ]
 
-AUTH_USER_MODEL = 'bibliothecaire.CustomUser'
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

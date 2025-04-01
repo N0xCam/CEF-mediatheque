@@ -4,40 +4,13 @@ from .forms import MembreForm, MediaForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
-from .forms import CustomUserCreationForm
 
 
-# Inscription
-def register(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('dashboard') # Voir plus bas pour la redirection
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'bibliothecaire/register.html', {'form': form})
 
-# Connexion
-class CustomLoginView(LoginView):
-    template_name = 'bibliothecaire/login.html'
-
-    def get_success_url(self):
-        if self.request.user.role == 'bibliothecaire':
-            return '/bibliothecaire/'
-        else:
-            return '/membre/'
 
 @login_required
 def dashboard(request):
-    if request.user.role == 'bibliothecaire' :
-        return render(request, 'bibliothecaire/dashboard.html')
-    return render(request, 'membre/dashboard.html')
-
-@login_required
-def dashboard_membre(request):
-    return render(request, 'membres/membre_dashboard.html')
+    return render(request, 'bibliothecaire/dashboard.html')
 
 def liste_membres(request):
     membres = Membre.objects.all()

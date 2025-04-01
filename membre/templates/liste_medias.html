@@ -13,9 +13,18 @@
     <ul>
         {% for media in medias %}
             <li>
-                {{ media.titre }} - {{ media.auteur }}
+                {{ media.titre }} - {{ media.auteur }
             </li>
+
+        {% empty %}
+
+            <li> Aucun média disponible. </li>
+
         {% endfor %}
     </ul>
+
+</body>
+</html>
+
 
 
