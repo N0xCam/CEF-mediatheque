@@ -1,16 +1,11 @@
+from sys import prefix
 from django.shortcuts import render, redirect
-from .models import Membre, Media
-from .forms import MembreForm, MediaForm
+from .forms import MembreForm, ModelAForm, ModelBForm
+from .models import ModelA, ModelB, Membre
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
 
-
-
-
-@login_required
 def dashboard(request):
-    return render(request, 'bibliothecaire/dashboard.html')
+    return render(request, 'dashboard.html')
 
 def liste_membres(request):
     membres = Membre.objects.all()
@@ -23,19 +18,24 @@ def ajouter_membre(request):
             form.save()
             return redirect('liste_membres')
     else: form = MembreForm()
-
     return render(request, 'ajouter_membre.html', {'form' : form})
 
-def liste_medias(request):
-    medias = Media.objects.all()
-    return render(request, 'liste_medias.html', {'medias' : medias})
-
 def ajouter_media(request):
-    if request.method == "POST":
-        form = MediaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('liste_medias')
-    else: form = MediaForm()
+    if request.method == 'POST':
+        form_a = ModelAForm(request.POST),
+        form_b = ModelBForm(request.POST),
+
+        if form_a.is_valid():
+            form_a.save()
+        if form_b.is_valid():
+            form_b.save()
+    else:
+        form_a = ModelAForm()
+        form_b = ModelBForm()
+    return render(request, 'ajouter_media.html', {'form_a': form_a}, {'form_b': form_b})
+
+def liste_medias(request):
+    medias = ModelA.objects.all(), ModelB.objects.all()
+    return render(request, 'liste_medias.html', {'medias' : medias})
 
 

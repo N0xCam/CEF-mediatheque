@@ -7,11 +7,19 @@
 </head>
 <body>
 
-    <h2> Ajouter un nouveau média </h2>
+    <h2> Ajouter des médias </h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit"> Enregistrer </button>
+        <h3> Ajouter un média empruntable </h3>
+        {{ form_a.as_p }}
+        <button type="submit" name="submit_form_a"> Enregistrer </button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        <h3> Ajouter un média enon empruntable, consultable sur place </h3>
+        {{ form_b.as_p }}
+        <button type="submit" name="submit_form_b"> Enregistrer </button>
     </form>
 
 </body>

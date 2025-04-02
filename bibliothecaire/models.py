@@ -10,13 +10,12 @@ class Membre(models.Model):
     def __str__(self):
         return self.nom
 
-#Modèle Média
-class Media(models.Model):
+#Modèle Média empruntable
+class ModelA(models.Model):
     TYPE_CHOICES = [
         ('livre', 'Livre'),
         ('dvd', 'Dvd'),
         ('cd', 'Cd'),
-        ('jeu de plateau', "Jeu de Plateau")
     ]
     titre = models.CharField(max_length=255)
     auteur = models.CharField(max_length=255)
@@ -24,14 +23,14 @@ class Media(models.Model):
     disponible = models.BooleanField(default=True)
 
     def __str__(self):
+        return f" {self.type_media} - {self.titre} - {self.auteur})"
+
+#Modèle Média non empruntable
+class ModelB(models.Model):
+    titre = models.CharField(max_length=255)
+    auteur = models.CharField(max_length=255)
+
+    def __str__(self):
         return f" {self.titre} - {self.auteur})"
 
 #Modèle Emprunt
-class Emprunt(models.Model):
-    membre = models.ForeignKey(Membre, on_delete=models.CASCADE)
-    media = models.ForeignKey(Media, on_delete=models.CASCADE)
-    date_emprunt = models.DateField(null=True, blank=True)
-
-    def __str__(self):
-        return f" {self.membre} a emprunté {self.media}"
-

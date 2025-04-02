@@ -1,6 +1,6 @@
 from django import forms
-from .models import Membre, Media
-from django.contrib.auth.forms import UserCreationForm
+from .models import ModelA, ModelB, Membre
+
 
 
 class MembreForm(forms.ModelForm):
@@ -8,8 +8,13 @@ class MembreForm(forms.ModelForm):
         model = Membre
         fields = ['nom', 'email']
 
-class MediaForm(forms.ModelForm):
-    class MediaMeta :
-        model = Media
-        fields = ['type_media', 'titre', 'auteur', 'disponible']
+class ModelAForm(forms.ModelForm):
+    class Meta :
+        model = ModelA
+        fields = ['type_media', 'titre', 'auteur']
+
+class ModelBForm(forms.ModelForm):
+    class Meta :
+        model = ModelB
+        fields = ['titre', 'auteur']
 

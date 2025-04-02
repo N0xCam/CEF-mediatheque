@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import liste_membres, ajouter_membre, liste_medias, ajouter_media, dashboard
+from .views import liste_membres, ajouter_membre, ajouter_media, dashboard, liste_medias
 
 
 app_name = "bibliothecaire"
