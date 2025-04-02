@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un média</title>
+    <title>Ajouter un jeu de plateau</title>
 </head>
 <body>
 
-    <h2> Ajouter des médias </h2>
+<h2> Ajouter des Jeux de Plateaux </h2>
     <form method="post">
         {% csrf_token %}
-        <h3> Ajouter un média empruntable </h3>
         {{ form.as_p }}
         <button type="submit"> Enregistrer </button>
     </form>
+
+
 
 </body>
 </html>

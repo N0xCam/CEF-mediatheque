@@ -18,24 +18,32 @@ def ajouter_membre(request):
             form.save()
             return redirect('liste_membres')
     else: form = MembreForm()
-    return render(request, 'ajouter_membre.html', {'form' : form})
+    return render(request, 'liste_membres.html', {'form' : form})
 
 def ajouter_media(request):
-    if request.method == 'POST':
-        form_a = ModelAForm(request.POST),
-        form_b = ModelBForm(request.POST),
+    if request.method == "POST":
+        form = ModelAForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('liste_medias')
+    else: form = ModelAForm
+    return render(request, 'ajouter_media.html', {'form': form})
 
-        if form_a.is_valid():
-            form_a.save()
-        if form_b.is_valid():
-            form_b.save()
-    else:
-        form_a = ModelAForm()
-        form_b = ModelBForm()
-    return render(request, 'ajouter_media.html', {'form_a': form_a}, {'form_b': form_b})
+def ajouter_jeu_plateau(request):
+    if request.method == "POST":
+        form = ModelBForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('liste_medias_jeu_plateau')
+    else: form = ModelBForm
+    return render(request, 'ajouter_jeu_plateau.html', {'form': form})
+
 
 def liste_medias(request):
-    medias = ModelA.objects.all(), ModelB.objects.all()
+    medias = ModelA.objects.all(),
     return render(request, 'liste_medias.html', {'medias' : medias})
 
+def liste_medias_jeux_plateaux(request):
+    jeuxMedias = ModelB.objects.all(),
+    return render(request, 'liste_medias_jeu_plateau.html', {'jeuxMedias': jeuxMedias})
 

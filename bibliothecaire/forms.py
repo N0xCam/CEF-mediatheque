@@ -1,8 +1,6 @@
 from django import forms
 from .models import ModelA, ModelB, Membre
 
-
-
 class MembreForm(forms.ModelForm):
     class Meta :
         model = Membre
