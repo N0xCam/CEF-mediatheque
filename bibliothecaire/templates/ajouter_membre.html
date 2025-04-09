@@ -7,12 +7,10 @@
 </head>
 <body>
 
-    <h2> Ajouter un nouveau membre </h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit"> Enregistrer </button>
-    </form>
+  <h1>Ajouter un Membre</h1>
 
-</body>
-</html>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter</button>
+</form>

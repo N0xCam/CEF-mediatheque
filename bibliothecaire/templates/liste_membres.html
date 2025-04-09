@@ -7,16 +7,22 @@
 </head>
 <body>
 
-<h2> Liste des membres </h2>
+<h1>Liste des Membres</h1>
 
-<ul>
-    {% for membre in membres %}
-        <li> {{membre.nom}} - {{membre.email}} </li>
-
-    {% endfor %}
-</ul>
-
-</body>
-</html>
-
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for membre in membres %}
+            <tr>
+                <td>{{ membre.nom }}</td>
+                <td>{{ membre.email }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 

@@ -4,10 +4,10 @@ from sys import prefix
 from django.contrib.auth import authenticate, login
 from django.core.checks import messages
 from django.forms import Media
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .forms import MembreForm, MediaForm, BibliothecaireLoginForm
+from .forms import MembreForm, MediaForm
 from .models import Membre, Livre, CD, DVD, JeuDePlateau
 from django.contrib.auth.decorators import login_required, user_passes_test
 import json
@@ -56,13 +56,16 @@ def liste_membres(request):
 @login_required
 #@user_passes_test(is_bibliothecaire)
 def ajouter_membre(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = MembreForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('liste_membres')
-    else: form = MembreForm()
-    return render(request, 'liste_membres.html', {'form' : form})
+            form.save()  # Sauvegarde le membre
+            messages.success(request, "Membre créé avec succès!")  # Message de succès
+            form = MembreForm()
+    else:
+        form = MembreForm()
+
+    return render(request, 'ajouter_membre.html', {'form': form})
 
 @login_required
 #@user_passes_test(is_bibliothecaire)
@@ -131,25 +134,58 @@ def ajouter_media(request):
 
     return render(request, 'ajouter_media.html')
 
+def modifier_media(request, media_id):
+    # Charger le média correspondant à l'id
+    try:
+        media = Media.objects.get(id=media_id)
+    except Media.DoesNotExist:
+        return HttpResponseNotFound("Média introuvable")
+
+    # Ton code pour modifier le média
+    if request.method == 'POST':
+        # Effectuer les modifications et sauvegarder
+        pass
+
+    return render(request, 'modifier_media.html', {'media': media})
+
 def liste_medias(request):
     chemin_fichier = os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'medias.json')
 
     listmedia = []
-    medias_par_type = {}
 
     try:
         with open(chemin_fichier, encoding='utf-8') as f:
             listmedia = json.load(f)
-            print("Données chargées :", listmedia)
+            print("Données chargées :", listmedia)  # Vérifie dans la console si les données sont chargées correctement
     except Exception as e:
         print("Erreur lors de la lecture du JSON :", e)
 
-    # Trie les médias par type
-    for media in listmedia:
-        type_media = media.get("type", "autre").lower()
-        if type_media not in medias_par_type:
-            medias_par_type[type_media] = []
-        medias_par_type[type_media].append(media)
+    return render(request, 'liste_medias.html', {'medias': listmedia})
 
-    print("Médias triés :", medias_par_type)
-    return render(request, 'liste_medias.html', {'medias_par_type': medias_par_type})
+def supprimer_media(request, media_id):
+    # Cherche le média en fonction de l'ID
+    media = get_object_or_404(Media, id=media_id)
+
+    if request.method == 'POST':
+        # Supprimer le média
+        media.delete()  # Si tu utilises une base de données, sinon supprime du JSON
+        return redirect('bibliothecaire:liste_medias')  # Redirige vers la liste des médias
+
+    return render(request, 'supprimer_media.html', {'media': media})
+
+
+from django.shortcuts import get_object_or_404, redirect
+from .models import Media
+
+
+def emprunter_media(request, media_id):
+    # Cherche le média à emprunter
+    media = get_object_or_404(Media, id=media_id)
+
+    if request.method == 'POST':
+        # Marque le média comme emprunté
+        media.emprunté = True  # Assure-toi d'avoir ce champ dans ton modèle
+        media.save()  # Sauvegarde la modification
+        return redirect('bibliothecaire:liste_medias')  # Redirige vers la liste des médias
+
+    return render(request, 'emprunter_media.html', {'media': media})

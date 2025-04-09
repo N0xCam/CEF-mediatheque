@@ -1,12 +1,39 @@
-<h1>Liste des Médias</h1>
-
-
-{% for type, medias in medias_par_type.items %}
-    <h2> {{ type }}</h2>
-    <ul>
-        {% for media in medias %}
-            <li>{{ media.titre }}</li>
-
-        {% endfor %}
-    </ul>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Médias</title>
+</head>
+<body>
+    <h1>Liste des Médias</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if medias %}
+                {% for media in medias %}
+                    <tr>
+                        <td>{{ media.titre }}</td>
+                        <td>{{ media.auteur }}</td>
+                        <td>{{ media.type }}</td>
+                        <td>
+                            <a href="{% url 'bibliothecaire:modifier_media' media.id %}">Modifier</a> |
+                            <a href="{% url 'bibliothecaire:supprimer_media' media.id %}">Supprimer</a> |
+                            <a href="{% url 'bibliothecaire:emprunter_media' media.id %}">Emprunter</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="4">Aucun média disponible.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>

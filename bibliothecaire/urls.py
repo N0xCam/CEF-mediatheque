@@ -11,5 +11,9 @@ urlpatterns = [
     path('ajouter_media/', views.ajouter_media, name='ajouter_media'),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('login/', views.login, name="login"),
+    path('medias/', views.liste_medias, name='liste_medias'),
+    path('medias/modifier/<int:media_id>/', views.modifier_media, name='modifier_media'),
+    path('medias/supprimer/<int:media_id>/', views.supprimer_media, name='supprimer_media'),
+    path('medias/emprunter/<int:media_id>/', views.emprunter_media, name='emprunter_media'),  # à venir
 
 ]

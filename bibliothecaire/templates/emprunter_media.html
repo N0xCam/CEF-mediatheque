@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Emprunter un média</title>
+</head>
+<body>
+    <h1>Emprunter le média</h1>
+    <p>Tu es sur le point d’emprunter : <strong>{{ media.titre }}</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmer l'emprunt</button>
+        <a href="{% url 'bibliothecaire:liste_medias' %}">Annuler</a>
+    </form>
+</body>
+</html>
