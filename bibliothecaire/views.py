@@ -4,6 +4,7 @@ from sys import prefix
 from django.contrib.auth import authenticate, login
 from django.core.checks import messages
 from django.forms import Media
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from .forms import MembreForm, MediaForm, BibliothecaireLoginForm
@@ -13,6 +14,7 @@ import json
 import os
 from django.conf import settings
 from collections import defaultdict
+from django.contrib import messages
 
 
 #def is_bibliothecaire(user):
@@ -77,18 +79,60 @@ def medias_bibliothecaire(request):
 @login_required
 #@user_passes_test(is_bibliothecaire)
 def ajouter_media(request):
-    if request.method == 'POST':
-        form = MediaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('liste_medias')  # Remplace 'liste_medias' si ton URL porte un autre nom
-    else:
-        form = MediaForm()
+    if request.method == "POST":
+        # Récupérer les données du formulaire
+        type_media = request.POST.get("type")
+        titre = request.POST.get("title")
+        auteur = request.POST.get("auteur")  # Par exemple pour un livre
+        artiste = request.POST.get("artiste")  # Pour un CD
+        realisateur = request.POST.get("realisateur") # Pour un DVD
+        description = request.POST.get("description")  # Pour un jeu de plateau
+        print(f"Type de média: {type_media}, Titre: {titre}")  # Logs pour vérifier les données envoyées
 
-    return render(request, 'ajouter_media.html', {'form': form})
+        # Créer un dictionnaire pour le média
+        nouveau_media = {
+            "type": type_media,
+            "title": titre,
+        }
+
+        if type_media == "livre":
+            nouveau_media["auteur"] = auteur
+        elif type_media == "cd":
+            nouveau_media["artiste"] = artiste
+        elif type_media == "dvd":
+            nouveau_media["realisateur"] = realisateur
+        elif type_media == "jeu de plateau":
+            nouveau_media["description"] = description
+
+        # Charger le fichier JSON existant pour ajouter le nouveau média
+        chemin_fichier = os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'medias.json')
+
+        try:
+            with open(chemin_fichier, 'r+', encoding='utf-8') as f:
+                # Charger les données actuelles du fichier JSON
+                medias = json.load(f)
+                print("Médias existants avant ajout:", medias)  # Logs pour vérifier le contenu du fichier
+
+                # Ajouter le nouveau média
+                medias.append(nouveau_media)
+
+                # Revenir au début du fichier pour l'écrire à nouveau
+                f.seek(0)
+                json.dump(medias, f, ensure_ascii=False, indent=4)
+                print("Média ajouté avec succès:", nouveau_media)  # Log de succès
+
+            # Ajouter un message de succès
+            messages.success(request, 'Média ajouté avec succès!')
+
+        except Exception as e:
+            # Log détaillé en cas d'erreur
+            print("Erreur lors de l'ajout du média :", e)
+            messages.error(request, f"Erreur lors de l'ajout du média: {e}")
+
+    return render(request, 'ajouter_media.html')
 
 def liste_medias(request):
-    chemin_fichier = os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'medias.json')  # sans accent
+    chemin_fichier = os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'medias.json')
 
     listmedia = []
     medias_par_type = {}

@@ -1,24 +1,66 @@
-<form method="post">
+<h1>Ajouter un média</h1>
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="POST" action="{% url 'bibliothecaire:ajouter_media' %}">
     {% csrf_token %}
-
-    <label for="titre">Titre :</label>
-    <input type="text" id="titre" name="titre" required>
-
-    <label for="description">Description :</label>
-    <textarea id="description" name="description" required></textarea>
-
-    <label for="type_media">Type de Média :</label>
-    <select name="type_media" id="type_media">
+    <label for="type">Type de média :</label>
+    <select name="type" id="type">
         <option value="livre">Livre</option>
-        <option value="dvd">DVD</option>
         <option value="cd">CD</option>
-        <option value="jeu_de_plateau">Jeu de Plateau</option>
+        <option value="jeu de plateau">Jeu de plateau</option>
     </select>
+    <br>
 
-    <label for="est_empruntable">
-        <input type="checkbox" name="est_empruntable" {% if media.est_empruntable %}checked{% endif %} disabled>
-        Empruntable
-    </label>
+    <label for="title">Titre :</label>
+    <input type="text" name="title" id="title" required>
+    <br>
 
-    <button type="submit">Ajouter Média</button>
+    <!-- Champs pour chaque type de média -->
+    <div id="livre" class="media-fields" style="display:none;">
+        <label for="auteur">Auteur :</label>
+        <input type="text" name="auteur" id="auteur">
+        <br>
+    </div>
+
+    <div id="cd" class="media-fields" style="display:none;">
+        <label for="artiste">Artiste :</label>
+        <input type="text" name="artiste" id="artiste">
+        <br>
+    </div>
+
+    <div id="jeu_de_plateau" class="media-fields" style="display:none;">
+        <label for="description">Description :</label>
+        <textarea name="description" id="description"></textarea>
+        <br>
+    </div>
+
+    <button type="submit">Ajouter</button>
 </form>
+
+<script>
+    // Afficher ou cacher les champs en fonction du type de média
+    document.getElementById("type").addEventListener("change", function() {
+        var selectedType = this.value;
+        var fields = document.querySelectorAll('.media-fields');
+        fields.forEach(function(field) {
+            field.style.display = "none";  // Cache tous les champs
+        });
+
+        if (selectedType === "livre") {
+            document.getElementById("livre").style.display = "block";
+        } else if (selectedType === "cd") {
+            document.getElementById("cd").style.display = "block";
+        } else if (selectedType === "jeu de plateau") {
+            document.getElementById("jeu_de_plateau").style.display = "block";
+        }
+    });
+</script>
