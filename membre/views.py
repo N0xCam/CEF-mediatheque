@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from bibliothecaire.models import ModelA, ModelB
+from bibliothecaire.models import Media
 
 def liste_medias(request):
-    medias = ModelA.objects.all(), ModelB.objects.all()
+    medias = Media.objects.all()
     return render(request, 'liste_medias.html', {'medias' : medias})
 
 # Create your views here.

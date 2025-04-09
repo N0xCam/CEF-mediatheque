@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un média</title>
-</head>
-<body>
+<form method="post">
+    {% csrf_token %}
 
-    <h2> Ajouter des médias </h2>
-    <form method="post">
-        {% csrf_token %}
-        <h3> Ajouter un média empruntable </h3>
-        {{ form.as_p }}
-        <button type="submit"> Enregistrer </button>
-    </form>
+    <label for="titre">Titre :</label>
+    <input type="text" id="titre" name="titre" required>
 
-</body>
-</html>
+    <label for="description">Description :</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <label for="type_media">Type de Média :</label>
+    <select name="type_media" id="type_media">
+        <option value="livre">Livre</option>
+        <option value="dvd">DVD</option>
+        <option value="cd">CD</option>
+        <option value="jeu_de_plateau">Jeu de Plateau</option>
+    </select>
+
+    <label for="est_empruntable">
+        <input type="checkbox" name="est_empruntable" {% if media.est_empruntable %}checked{% endif %} disabled>
+        Empruntable
+    </label>
+
+    <button type="submit">Ajouter Média</button>
+</form>
