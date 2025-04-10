@@ -15,5 +15,6 @@ urlpatterns = [
     path('medias/modifier/<int:media_id>/', views.modifier_media, name='modifier_media'),
     path('medias/supprimer/<int:media_id>/', views.supprimer_media, name='supprimer_media'),
     path('medias/emprunter/<int:media_id>/', views.emprunter_media, name='emprunter_media'),  # à venir
-
+    path('membres/modifier/<int:membre_id>/', views.modifier_membre, name='modifier_membre'),
+    path('membres/supprimer/<int:membre_id>/', views.supprimer_membre, name='supprimer_membre'),
 ]

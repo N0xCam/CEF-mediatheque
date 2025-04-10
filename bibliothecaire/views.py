@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from sys import prefix
 
 from django.contrib.auth import authenticate, login
@@ -66,6 +66,26 @@ def ajouter_membre(request):
         form = MembreForm()
 
     return render(request, 'ajouter_membre.html', {'form': form})
+
+@login_required
+def modifier_membre(request, membre_id):
+    membre = get_object_or_404(Membre, pk=membre_id)
+
+    if request.method == 'POST':
+        form = MembreForm(request.POST, instance=membre)
+        if form.is_valid():
+            form.save()
+            return redirect('bibliothecaire:liste_membres')
+    else:
+        form = MembreForm(instance=membre)
+
+    return render(request, 'modifier_membres.html', {'form': form})
+
+@login_required
+def supprimer_membre(request, membre_id):
+    membre = get_object_or_404(Membre, pk=membre_id)
+    membre.delete()
+    return redirect('bibliothecaire:liste_membres')
 
 @login_required
 #@user_passes_test(is_bibliothecaire)
@@ -152,15 +172,22 @@ def liste_medias(request):
     chemin_fichier = os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'medias.json')
 
     listmedia = []
+    medias_par_type = {}
 
     try:
         with open(chemin_fichier, encoding='utf-8') as f:
             listmedia = json.load(f)
-            print("Données chargées :", listmedia)  # Vérifie dans la console si les données sont chargées correctement
     except Exception as e:
         print("Erreur lors de la lecture du JSON :", e)
 
-    return render(request, 'liste_medias.html', {'medias': listmedia})
+    # Trie les médias par type
+    for media in listmedia:
+        type_media = media.get("type", "autre").lower()
+        if type_media not in medias_par_type:
+            medias_par_type[type_media] = []
+        medias_par_type[type_media].append(media)
+
+    return render(request, 'liste_medias.html', {'medias_par_type': medias_par_type})
 
 def supprimer_media(request, media_id):
     # Cherche le média en fonction de l'ID
@@ -179,13 +206,43 @@ from .models import Media
 
 
 def emprunter_media(request, media_id):
-    # Cherche le média à emprunter
-    media = get_object_or_404(Media, id=media_id)
+    try:
+        with open(os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'medias.json'), 'r', encoding='utf-8') as f:
+            medias = json.load(f)
 
-    if request.method == 'POST':
-        # Marque le média comme emprunté
-        media.emprunté = True  # Assure-toi d'avoir ce champ dans ton modèle
-        media.save()  # Sauvegarde la modification
-        return redirect('bibliothecaire:liste_medias')  # Redirige vers la liste des médias
+        with open(os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'emprunts.json'), 'r', encoding='utf-8') as f:
+            emprunts = json.load(f)
 
-    return render(request, 'emprunter_media.html', {'media': media})
+        # On récupère le média sélectionné
+        media = next((m for m in medias if m['id'] == media_id), None)
+
+        if media is None:
+            return HttpResponseNotFound("Média non trouvé.")
+
+        # Vérification si c'est un jeu de plateau
+        if media['type'] == 'jeu de plateau':
+            return HttpResponse("Les jeux de plateau ne peuvent pas être empruntés.", status=400)
+
+        # Récupérer l'utilisateur
+        membre = request.user  # Ou à adapter si t'as un modèle Membre
+        if len([e for e in emprunts if e['membre_id'] == membre.id and e['rendu'] is False]) >= 3:
+            return HttpResponse("Vous avez déjà 3 emprunts en cours. Retournez un média avant d'emprunter un autre.", status=400)
+
+        # Ajouter l'emprunt dans le fichier emprunts.json
+        emprunt = {
+            'membre_id': membre.id,
+            'media_id': media_id,
+            'date_emprunt': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'date_retour': (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d %H:%M:%S"),
+            'rendu': False
+        }
+
+        emprunts.append(emprunt)
+        with open(os.path.join(settings.BASE_DIR, 'bibliothecaire', 'data', 'emprunts.json'), 'w', encoding='utf-8') as f:
+            json.dump(emprunts, f, ensure_ascii=False, indent=4)
+
+        return redirect('bibliothecaire:liste_emprunts')
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+        return HttpResponse("Une erreur est survenue.", status=500)

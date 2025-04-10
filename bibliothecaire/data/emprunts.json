@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "media_id": 3,
+        "membre_id": 2,
+        "date_emprunt": "2025-04-10",
+        "date_retour": "2025-04-17",
+        "retourne": false
+    },
+    {
+        "id": 2,
+        "media_id": 5,
+        "membre_id": 1,
+        "date_emprunt": "2025-04-07",
+        "date_retour": "2025-04-14",
+        "retourne": true,
+        "disponible": false
+    },
+    {
+        "id": 3,
+        "media_id": 4,
+        "membre_id": 3,
+        "date_emprunt": "2025-04-12",
+        "date_retour": "2025-04-19",
+        "retourne": false,
+        "disponible": false
+    },
+    {
+        "id": 4,
+        "media_id": 6,
+        "membre_id": 4,
+        "date_emprunt": "2025-04-2",
+        "date_retour": "2025-04-9",
+        "retourne": false,
+        "disponible": false
+    },
+    {
+        "id": 5,
+        "media_id": 2,
+        "membre_id": 5,
+        "date_emprunt": "2025-04-02",
+        "date_retour": "2025-04-09",
+        "retourne": true,
+        "disponible": false
+    },
+    {
+        "membre_id": 1,
+        "media_id": 13,
+        "date_emprunt": "2025-04-10",
+        "date_retour": "2025-04-17"
+    },
+    {
+        "membre_id": 1,
+        "media_id": 2,
+        "date_emprunt": "2025-04-10",
+        "date_retour": "2025-04-17"
+    }
+]

@@ -1,39 +1,30 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Médias</title>
-</head>
-<body>
-    <h1>Liste des Médias</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Type</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if medias %}
-                {% for media in medias %}
-                    <tr>
-                        <td>{{ media.titre }}</td>
-                        <td>{{ media.auteur }}</td>
-                        <td>{{ media.type }}</td>
-                        <td>
-                            <a href="{% url 'bibliothecaire:modifier_media' media.id %}">Modifier</a> |
-                            <a href="{% url 'bibliothecaire:supprimer_media' media.id %}">Supprimer</a> |
-                            <a href="{% url 'bibliothecaire:emprunter_media' media.id %}">Emprunter</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <tr><td colspan="4">Aucun média disponible.</td></tr>
-            {% endif %}
-        </tbody>
-    </table>
-</body>
-</html>
+{% for type, medias in medias_par_type.items %}
+    <h2>{{ type|title }}</h2>
+    <div class="medias-list">
+        {% for media in medias %}
+            <div class="media">
+                <h3>{{ media.titre }}</h3>
+                <p>Type : {{ media.type }}</p>
+
+                <!-- Affichage de l'artiste ou de l'auteur en fonction du type -->
+                {% if media.type == "cd" %}
+                    <p>Artiste : {{ media.artiste }}</p>
+                {% elif media.type == "livre" %}
+                    <p>Auteur : {{ media.auteur }}</p>
+                {% elif media.type == "film" %}
+                    <p>Réalisateur : {{ media.realisateur }}</p>
+                {% elif media.type == "jeu de plateau" %}
+                    <p>Réalisateur : {{ media.description }}</p>
+                {% else %}
+                    <p>Inconnu</p> <!-- Si ce n'est ni un livre ni un CD -->
+                {% endif %}
+
+                {% if media.id %}
+                    <a href="{% url 'bibliothecaire:emprunter_media' media.id %}">Emprunter</a>
+                {% else %}
+                    <p>Erreur : média sans ID</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}

@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Membres</title>
-</head>
-<body>
-
-<h1>Liste des Membres</h1>
+<h1>Liste des membres</h1>
 
 <table>
     <thead>
         <tr>
             <th>Nom</th>
+            <th>Prénom</th>
             <th>Email</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for membre in membres %}
-            <tr>
-                <td>{{ membre.nom }}</td>
-                <td>{{ membre.email }}</td>
-            </tr>
+        <tr>
+            <td>{{ membre.nom }}</td>
+            <td>{{ membre.email }}</td>
+            <td>
+                <a href="{% url 'bibliothecaire:modifier_membre' membre.id %}">Modifier</a> |
+                <a href="{% url 'bibliothecaire:supprimer_membre' membre.id %}">Supprimer</a>
+            </td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
-

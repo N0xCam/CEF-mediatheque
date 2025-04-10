@@ -3,91 +3,106 @@
         "id": 1,
         "type": "film",
         "titre": "Le voyage de Chihiro",
-        "realisateur": "Hayao Miyazaki"
+        "realisateur": "Hayao Miyazaki",
+        "disponible": true
     },
     {
         "id": 2,
         "type": "film",
         "titre": "Mon voisin Totoro",
-        "realisateur": "Hayao Miyazaki"
+        "realisateur": "Hayao Miyazaki",
+        "disponible": false
     },
     {
         "id": 3,
         "type": "film",
         "titre": "Princesse Monoké",
-        "realisateur": "Hayao Miyazaki"
+        "realisateur": "Hayao Miyazaki",
+        "disponible": false
     },
     {
         "id": 4,
         "type": "film",
         "titre": "Le château ambulant",
-        "realisateur": "Hayao Miyazaki"
+        "realisateur": "Hayao Miyazaki",
+        "disponible": false
     },
     {
         "id": 5,
         "type": "film",
         "titre": "Ponyo sur la falaise",
-        "realisateur": "Hayao Miyazaki"
+        "realisateur": "Hayao Miyazaki",
+        "disponible": false
     },
     {
         "id": 6,
         "type": "cd",
         "titre": "Going To Hell",
-        "artiste": "The Pretty Reckless"
+        "artiste": "The Pretty Reckless",
+        "disponible": true
     },
     {
         "id": 7,
         "type": "cd",
         "titre": "Bad Reputation",
-        "artiste": "Joan Jett"
+        "artiste": "Joan Jett",
+        "disponible": true
     },
     {
         "id": 10,
         "type": "cd",
         "titre": "Hybrid Theory",
-        "artiste": "Linkin Park"
+        "artiste": "Linkin Park",
+        "disponible": true
     },
     {
         "id": 9,
         "type": "cd",
         "titre": "Demons",
-        "artiste": "Imagine Dragons"
+        "artiste": "Imagine Dragons",
+        "disponible": true
     },
     {
         "id": 10,
         "type": "cd",
         "titre": "Music of the Spheres",
-        "artiste": "Coldplay"
+        "artiste": "Coldplay",
+        "disponible": true
     },
     {
         "id": 11,
         "type": "livre",
         "titre": "The Hunger Games",
-        "auteur": "Suzanne Collins"
+        "auteur": "Suzanne Collins",
+        "disponible": true
     },
     {
         "id": 12,
         "type": "livre",
         "titre": "22.11.63",
-        "auteur": "Stephen King"
+        "auteur": "Stephen King",
+        "disponible": true
     },
     {
         "id": 13,
         "type": "livre",
         "titre": "La dernière allumette",
-        "auteur": "Marie Vareille"
+        "auteur": "Marie Vareille",
+        "disponible": true
     },
     {
         "id": 14,
         "type": "livre",
         "titre": "La servante écarlate",
-        "auteur": "Margaret Atwood"
+        "auteur": "Margaret Atwood",
+        "disponible": true
     },
     {
         "id": 15,
         "type": "livre",
         "titre": "Deux soeurs pour un roi",
-        "auteur": "Philippa Gregory"
+        "auteur": "Philippa Gregory",
+        "disponible": true
     },
     {
         "id": 16,
