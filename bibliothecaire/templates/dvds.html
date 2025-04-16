@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des DVDs</title>
+</head>
+<body>
+    <h1>Liste des DVDs</h1>
+    <ul>
+        {% for dvd in dvds %}
+            <li>
+               <p> <strong>{{ dvd.titre }}</strong> par {{dvd.realisateur}} </p>
+                <button>Emprunter</button>
+                <button>Retourner</button>
+            </li>
+        {% empty %}
+            <li>Aucun DVD disponible</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

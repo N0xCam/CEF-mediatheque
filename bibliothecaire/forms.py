@@ -18,41 +18,24 @@ class MembreForm(forms.ModelForm):
         fields = ['nom', 'email']
 
 
-def ajouter_media(request):
-    if request.method == 'POST':
-        form = MediaForm(request.POST)
-        if form.is_valid():
-            form.save()  # Sauver le média dans la base
-            return redirect('liste_medias')  # Rediriger vers la page de la liste des médias
-    else:
-        form = MediaForm()
-
-    return render(request, 'ajouter_media.html', {'form': form})
 
 
+class LivreForm(forms.ModelForm):
+    class Meta:
+        model = Livre
+        fields = '__all__'
 
-class MediaForm(forms.Form):
-    TYPE_CHOICES = [
-        ('livre', 'Livre'),
-        ('dvd', 'DVD'),
-        ('cd', 'CD'),
-        ('jeu_de_plateau', 'Jeu de Plateau'),
-    ]
+class CDForm(forms.ModelForm):
+    class Meta:
+        model = CD
+        fields = '__all__'
 
-    type_media = forms.ChoiceField(choices=TYPE_CHOICES, required=True)
-    titre = forms.CharField(max_length=255)
-    description = forms.CharField(widget=forms.Textarea)
+class DVDForm(forms.ModelForm):
+    class Meta:
+        model = DVD
+        fields = '__all__'
 
-    def save(self):
-        type_media = self.cleaned_data.get('type_media')
-        titre = self.cleaned_data.get('titre')
-        description = self.cleaned_data.get('description')
-
-        if type_media == 'livre':
-            return Livre.objects.create(titre=titre, description=description)
-        elif type_media == 'dvd':
-            return DVD.objects.create(titre=titre, description=description)
-        elif type_media == 'cd':
-            return CD.objects.create(titre=titre, description=description)
-        elif type_media == 'jeu_de_plateau':
-            return JeuDePlateau.objects.create(titre=titre, description=description)
+class JeuDePlateauForm(forms.ModelForm):
+    class Meta:
+        model = JeuDePlateau
+        fields = '__all__'

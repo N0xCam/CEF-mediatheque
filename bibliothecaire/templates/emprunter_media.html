@@ -2,16 +2,40 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Emprunter un média</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprunter un Média</title>
 </head>
 <body>
-    <h1>Emprunter le média</h1>
-    <p>Tu es sur le point d’emprunter : <strong>{{ media.titre }}</strong></p>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirmer l'emprunt</button>
-        <a href="{% url 'bibliothecaire:liste_medias' %}">Annuler</a>
+  <h1>Emprunter un média</h1>
+
+  {% if error %}
+    <div style="color: red; font-weight: bold;">
+      {{ error }}
+    </div>
+  {% endif %}
+
+  {% if media %}
+    <h2>{{ media.titre }}</h2>
+    <p><strong>Description :</strong> {{ media.description }}</p>
+    <p><strong>Catégorie :</strong> {{ media.categorie }}</p>
+    <p><strong>Disponible :</strong> {{ media.disponible|yesno }}</p>
+
+    <h3>Règles d'emprunt</h3>
+    <ul>
+      <li>Vous pouvez emprunter ce média pendant 7 jours maximum.</li>
+      <li>Vous ne pouvez pas avoir plus de 3 emprunts en cours.</li>
+      <li>Vous ne pouvez pas emprunter si vous avez des emprunts en retard.</li>
+    </ul>
+
+    <form method="POST" action="{% url 'bibliothecaire:emprunter_media' media.id %}">
+      {% csrf_token %}
+      <button type="submit">Emprunter</button>
     </form>
+
+  {% else %}
+    <p>Ce média n'existe pas ou a déjà été emprunté.</p>
+  {% endif %}
+
 </body>
 </html>

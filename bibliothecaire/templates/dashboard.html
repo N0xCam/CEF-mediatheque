@@ -12,11 +12,25 @@
 <nav>
     <ul>
         <h3>Les médias</h3>
-        <li> <a href="{% url 'bibliothecaire:liste_medias' %}">Liste des médias </a> </li>
-        <li> <a href="{% url 'bibliothecaire:ajouter_media' %}">Ajouter médias </a> </li>
+        <li> <a href="/bibliothecaire/medias">Liste des médias </a> </li>
+        <li> <a href="/bibliothecaire/ajouter_media">Ajouter médias </a> </li>
+
+
+        <li> Liste des médias</li>
+        <li> <a href="/bibliothecaire/livres">Liste livres </a> </li>
+        <li> <a href="/bibliothecaire/cds">Liste cd </a> </li>
+        <li> <a href="/bibliothecaire/dvds">Liste dvd </a> </li>
+        <li> <a href="/bibliothecaire/jeux">Liste jeux </a> </li>
+
+        <li> Ajouter des médias</li>
+        <li> <a href="/bibliothecaire/ajouter-livre">Ajouter livres </a> </li>
+        <li> <a href="/bibliothecaire/ajouter-cd">Ajouter CD </a> </li>
+        <li> <a href="/bibliothecaire/ajouter-dvd">Ajouter DVD </a> </li>
+        <li> <a href="/bibliothecaire/ajouter-jeu">Ajouter jeu de plateau</a> </li>
+
         <h3>Les membres</h3>
-        <li> <a href="{% url 'bibliothecaire:liste_membres' %}">Liste des membres</a> </li>
-        <li> <a href="{% url 'bibliothecaire:ajouter_membre' %}">Ajouter membre </a> </li>
+        <li>  <a href="/bibliothecaire/membres">Liste des membres</a> </li>
+        <li> <a href="/bibliothecaire/ajouter_membre/">Ajouter membre </a> </li>
     </ul>
 </nav>
 

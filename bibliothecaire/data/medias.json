@@ -1,35 +1,35 @@
 [
     {
         "id": 1,
-        "type": "film",
+        "type": "dvd",
         "titre": "Le voyage de Chihiro",
         "realisateur": "Hayao Miyazaki",
-        "disponible": true
+        "disponible": false
     },
     {
         "id": 2,
-        "type": "film",
+        "type": "dvd",
         "titre": "Mon voisin Totoro",
         "realisateur": "Hayao Miyazaki",
         "disponible": false
     },
     {
         "id": 3,
-        "type": "film",
-        "titre": "Princesse Monoké",
+        "type": "dvd",
+        "titre": "Princesse Monok\u00e9",
         "realisateur": "Hayao Miyazaki",
         "disponible": false
     },
     {
         "id": 4,
-        "type": "film",
-        "titre": "Le château ambulant",
+        "type": "dvd",
+        "titre": "Le ch\u00e2teau ambulant",
         "realisateur": "Hayao Miyazaki",
         "disponible": false
     },
     {
         "id": 5,
-        "type": "film",
+        "type": "dvd",
         "titre": "Ponyo sur la falaise",
         "realisateur": "Hayao Miyazaki",
         "disponible": false
@@ -86,14 +86,14 @@
     {
         "id": 13,
         "type": "livre",
-        "titre": "La dernière allumette",
+        "titre": "La derni\u00e8re allumette",
         "auteur": "Marie Vareille",
         "disponible": true
     },
     {
         "id": 14,
         "type": "livre",
-        "titre": "La servante écarlate",
+        "titre": "La servante \u00e9carlate",
         "auteur": "Margaret Atwood",
         "disponible": true
     },
@@ -108,30 +108,35 @@
         "id": 16,
         "type": "jeu de plateau",
         "titre": "Flamecraft",
-        "description": "Dans Flamecraft, 1 à 5 joueurs jouent le rôle de gardiens des flammes, rassemblant des objets, plaçant des dragons et lançant des enchantements pour améliorer les boutiques de la ville. Les dragons sont spécialisés (pain, viande, fer, cristal, plante et potion) et les gardiens de flammes savent quels magasins sont les meilleurs pour chacun d'eux. Visitez une boutique pour obtenir des objets et une faveur de l'un des dragons qui s'y trouve. Les objets collectés peuvent être utilisés pour enchanter une boutique, gagner en réputation et obtenir les faveurs de tous les dragons de la boutique. Si vous avez la chance d'attirer des dragons prestigieux, vous aurez l'occasion de gagner encore plus de réputation."
+        "description": "Dans Flamecraft, 1 \u00e0 5 joueurs jouent le r\u00f4le de gardiens des flammes, rassemblant des objets, pla\u00e7ant des dragons et lan\u00e7ant des enchantements pour am\u00e9liorer les boutiques de la ville. Les dragons sont sp\u00e9cialis\u00e9s (pain, viande, fer, cristal, plante et potion) et les gardiens de flammes savent quels magasins sont les meilleurs pour chacun d'eux. Visitez une boutique pour obtenir des objets et une faveur de l'un des dragons qui s'y trouve. Les objets collect\u00e9s peuvent \u00eatre utilis\u00e9s pour enchanter une boutique, gagner en r\u00e9putation et obtenir les faveurs de tous les dragons de la boutique. Si vous avez la chance d'attirer des dragons prestigieux, vous aurez l'occasion de gagner encore plus de r\u00e9putation.",
+        "disponible": false
     },
     {
         "id": 17,
         "type": "jeu de plateau",
         "titre": "Némésis",
-        "description": "Nemesis est un jeu de science-fiction et de survie pour 1 à 5 joueurs dans lequel les joueurs, qui forment l'équipage d'un vaisseau spatial, sortent de leur état d'hibernation. \nDans ce jeu de coopération combiné avec du bluff, des trahisons et d'autres éléments dans le cadre d'une aventure d'horreur et de survie dans un contexte de science-fiction."
+        "description": "Nemesis est un jeu de science-fiction et de survie pour 1 \u00e0 5 joueurs dans lequel les joueurs, qui forment l'\u00e9quipage d'un vaisseau spatial, sortent de leur \u00e9tat d'hibernation. \nDans ce jeu de coop\u00e9ration combin\u00e9 avec du bluff, des trahisons et d'autres \u00e9l\u00e9ments dans le cadre d'une aventure d'horreur et de survie dans un contexte de science-fiction.",
+        "disponible": false
     },
     {
         "id": 18,
         "type": "jeu de plateau",
         "titre": "Townsfolk Tussle",
-        "description": "Après la mort du shérif bien-aimé d'Eureka Springs, les Ruffians arrivent en masse pour profiter de la ville sans défense! C'est à vous et à vos concitoyens qu'il incombe de réduire ces fauteurs de troubles à néant. Et qui sait, si vous jouez bien vos cartes, vous pourriez bien vous montrer digne de devenir le nouveau shérif!\n\nDans chaque partie de Townsfolk Tussle, votre objectif est d'éliminer quatre Ruffians uniques, tous plus coriaces les uns que les autres! Vous pourrez améliorer l'équipement de vos habitants, explorer Eureka Springs et concocter des stratégies uniques pour vaincre des voyous encore plus singuliers."
+        "description": "Apr\u00e8s la mort du sh\u00e9rif bien-aim\u00e9 d'Eureka Springs, les Ruffians arrivent en masse pour profiter de la ville sans d\u00e9fense! C'est \u00e0 vous et \u00e0 vos concitoyens qu'il incombe de r\u00e9duire ces fauteurs de troubles \u00e0 n\u00e9ant. Et qui sait, si vous jouez bien vos cartes, vous pourriez bien vous montrer digne de devenir le nouveau sh\u00e9rif!\n\nDans chaque partie de Townsfolk Tussle, votre objectif est d'\u00e9liminer quatre Ruffians uniques, tous plus coriaces les uns que les autres! Vous pourrez am\u00e9liorer l'\u00e9quipement de vos habitants, explorer Eureka Springs et concocter des strat\u00e9gies uniques pour vaincre des voyous encore plus singuliers.",
+        "disponible": false
     },
     {
         "id": 19,
         "type": "jeu de plateau",
         "titre": "Chroniques de Drunagor",
-        "description": "Chroniques de Drunagor - L'Âge des Ténèbres est un jeu de plateau entièrement coopératif et stratégique de combat tactique dans une aventure de type dungeon craw pour un à cinq joueurs."
+        "description": "Chroniques de Drunagor - L'\u00c2ge des T\u00e9n\u00e8bres est un jeu de plateau enti\u00e8rement coop\u00e9ratif et strat\u00e9gique de combat tactique dans une aventure de type dungeon craw pour un \u00e0 cinq joueurs.",
+        "disponible": false
     },
     {
         "id": 20,
         "type": "jeu de plateau",
-        "titre": "Le secret de mon père",
-        "description": "Le Secret de mon père est un jeu narratif de pose d'ouvriers. Incarnez des membres d’une fratrie dont le père, tout juste décédé, vous a légué son laboratoire rempli d’inventions inachevées."
+        "titre": "Le secret de mon p\u00e8re",
+        "description": "Le Secret de mon p\u00e8re est un jeu narratif de pose d'ouvriers. Incarnez des membres d\u2019une fratrie dont le p\u00e8re, tout juste d\u00e9c\u00e9d\u00e9, vous a l\u00e9gu\u00e9 son laboratoire rempli d\u2019inventions inachev\u00e9es.",
+        "disponible": false
     }
 ]

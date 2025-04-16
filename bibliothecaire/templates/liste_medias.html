@@ -1,30 +1,23 @@
-{% for type, medias in medias_par_type.items %}
-    <h2>{{ type|title }}</h2>
-    <div class="medias-list">
-        {% for media in medias %}
-            <div class="media">
-                <h3>{{ media.titre }}</h3>
-                <p>Type : {{ media.type }}</p>
+<h1>Tous les médias et jeux de plateau</h1>
 
-                <!-- Affichage de l'artiste ou de l'auteur en fonction du type -->
-                {% if media.type == "cd" %}
-                    <p>Artiste : {{ media.artiste }}</p>
-                {% elif media.type == "livre" %}
-                    <p>Auteur : {{ media.auteur }}</p>
-                {% elif media.type == "film" %}
-                    <p>Réalisateur : {{ media.realisateur }}</p>
-                {% elif media.type == "jeu de plateau" %}
-                    <p>Réalisateur : {{ media.description }}</p>
-                {% else %}
-                    <p>Inconnu</p> <!-- Si ce n'est ni un livre ni un CD -->
-                {% endif %}
+{% for item in items %}
+    <div>
+        <h2>{{ item.titre }}</h2>
 
-                {% if media.id %}
-                    <a href="{% url 'bibliothecaire:emprunter_media' media.id %}">Emprunter</a>
-                {% else %}
-                    <p>Erreur : média sans ID</p>
-                {% endif %}
-            </div>
-        {% endfor %}
+        {% if item.get_type == "Jeu de Plateau" %}
+            <p>Type: Jeu de Plateau</p>
+        {% elif item.get_type == "Media" %}
+            <p>Type: Média</p>
+        {% endif %}
+
+        <p>{{ item.description }}</p>
+        <p>{{ item.auteur }}</p>
+        <p>{{ item.date_publication }}</p>
+
+        {% if item.emprunte %}
+            <button>Retourner</button>
+        {% else %}
+            <button>Emprunter</button>
+        {% endif %}
     </div>
 {% endfor %}

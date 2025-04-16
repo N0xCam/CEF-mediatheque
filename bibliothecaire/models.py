@@ -16,16 +16,19 @@ class Membre(models.Model):
 
 
 class Media(models.Model):
-    titre = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(max_length=255, null=True, blank=True)
+    titre = models.CharField(max_length=100, null=True, blank=True)
     emprunte = models.BooleanField(default=False)
 
-    class Meta:
-        verbose_name = "Média"
-        verbose_name_plural = "Médias"
+    def get_type(self):
+        return "Media" # On donne un nom simple pour le type
 
-    def __str__(self):
-        return self.titre
+class JeuDePlateau(models.Model):
+    titre = models.CharField(max_length=100, null=True, blank=True)
+    auteur = models.CharField(max_length=100, null=True, blank=True)
+    emprunte = models.BooleanField(default=False)
+
+    def get_type(self):
+        return "Jeu de Plateau"
 
 class Livre(Media):
     auteur = models.CharField(max_length=100, null=True, blank=True)
@@ -45,11 +48,6 @@ class CD(Media):
     def __str__(self):
         return f" {self.titre} - {self.artiste}"
 
-class JeuDePlateau(models.Model):
-    description = models.CharField(max_length=255, null=True, blank=True)
-
-    def __str__(self):
-        return f" {self.titre} - {self.description})"
 
 class Bibliothecaire(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE),
@@ -61,3 +59,17 @@ class Bibliothecaire(models.Model):
     @classmethod
     def create(cls, username, password, email=""):
         Bibliothecaire.objects.create_user(username, email, password)
+
+class Emprunt(models.Model):
+    membre = models.ForeignKey(Membre, on_delete=models.CASCADE)
+    media = models.ForeignKey(Media,on_delete=models.CASCADE)
+    date_emprunt = models.DateTimeField(auto_now_add=True)
+    date_retour = models.DateTimeField()
+    est_retourne = models.BooleanField(default=False)
+
+    def est_en_retard(self):
+        return timezone.now() > self.date_retour and not self.est_retourne
+
+    def __str__(self):
+        return f" Emprunt de {self.membre.nom} pour {self.media.titre}"
+

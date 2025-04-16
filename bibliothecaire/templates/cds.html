@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des CD</title>
+</head>
+<body>
+    <h1>Liste des CD</h1>
+    <ul>
+        {% for cd in cds %}
+            <li>
+                <p> <strong>{{ cd.titre }}</strong> par {{cd.artiste}} </p>
+                <button>Emprunter</button>
+                <button>Retourner</button>
+            </li>
+        {% empty %}
+            <li>Aucun CD disponible</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
