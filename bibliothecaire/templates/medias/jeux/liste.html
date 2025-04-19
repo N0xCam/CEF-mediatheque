@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des livres</title>
+</head>
+<body>
+    <h1>Liste des livres</h1>
+    <a href="{% url 'bibliothecaire:jeu_ajouter' %}">Ajouter un livre</a>
+    <ul>
+        {% for livre in livres %}
+            <li>{{ jeu.titre }} </li>
+        {% empty %}
+            <li>Aucun livre enregistré.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -11,28 +11,25 @@
 
 <nav>
     <ul>
-        <h3>Les médias</h3>
-        <li> <a href="/bibliothecaire/medias">Liste des médias </a> </li>
-        <li> <a href="/bibliothecaire/ajouter_media">Ajouter médias </a> </li>
-
-
-        <li> Liste des médias</li>
-        <li> <a href="/bibliothecaire/livres">Liste livres </a> </li>
-        <li> <a href="/bibliothecaire/cds">Liste cd </a> </li>
-        <li> <a href="/bibliothecaire/dvds">Liste dvd </a> </li>
-        <li> <a href="/bibliothecaire/jeux">Liste jeux </a> </li>
-
-        <li> Ajouter des médias</li>
-        <li> <a href="/bibliothecaire/ajouter-livre">Ajouter livres </a> </li>
-        <li> <a href="/bibliothecaire/ajouter-cd">Ajouter CD </a> </li>
-        <li> <a href="/bibliothecaire/ajouter-dvd">Ajouter DVD </a> </li>
-        <li> <a href="/bibliothecaire/ajouter-jeu">Ajouter jeu de plateau</a> </li>
-
         <h3>Les membres</h3>
         <li>  <a href="/bibliothecaire/membres">Liste des membres</a> </li>
         <li> <a href="/bibliothecaire/ajouter_membre/">Ajouter membre </a> </li>
+
+        <h3> Les médias </h3>
+    <li><a href="{% url 'bibliothecaire:livres_liste' %}">Voir les livres</a></li>
+    <li><a href="{% url 'bibliothecaire:livre_ajouter' %}">Ajouter un livre</a></li>
+    <li><a href="{% url 'bibliothecaire:cds_liste' %}">Voir les CDs</a></li>
+    <li><a href="{% url 'bibliothecaire:cd_ajouter' %}">Ajouter un CD</a></li>
+    <li><a href="{% url 'bibliothecaire:dvds_liste' %}">Voir les DVDs</a></li>
+    <li><a href="{% url 'bibliothecaire:dvd_ajouter' %}">Ajouter un DVD</a></li>
+    <li><a href="{% url 'bibliothecaire:jeux_liste' %}">Voir les jeux de plateau</a></li>
+    <li><a href="{% url 'bibliothecaire:jeu_ajouter' %}">Ajouter un jeu de plateau</a></li>
+</ul>
+
+
     </ul>
 </nav>
+
 
 <p> Utilisez le menu pour gérer les livres et les membres </p>
 </body>

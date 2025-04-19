@@ -6,15 +6,12 @@
 </head>
 <body>
     <h1>Liste des DVDs</h1>
+    <a href="{% url 'bibliothecaire:dvd_ajouter' %}">Ajouter un DVD</a>
     <ul>
         {% for dvd in dvds %}
-            <li>
-               <p> <strong>{{ dvd.titre }}</strong> par {{dvd.realisateur}} </p>
-                <button>Emprunter</button>
-                <button>Retourner</button>
-            </li>
+      <li>{{ dvd.titre }} – {{ dvd.realisateur }}</li>
         {% empty %}
-            <li>Aucun DVD disponible</li>
+            <li>Aucun DVD enregistré.</li>
         {% endfor %}
     </ul>
 </body>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des livres</title>
+</head>
+<body>
+    <h1>Liste des livres</h1>
+    <a href="{% url 'bibliothecaire:ajouter_cd' %}">Ajouter un cd</a>
+    <ul>
+        {% for cd in cds %}
+            <li>{{ cd.titre }} – {{ cd.artiste }}</li>
+        {% empty %}
+            <li>Aucun cd enregistré.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
