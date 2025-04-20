@@ -2,7 +2,7 @@ Instructions d’exécution du projet
 
 A. Cloner le projet depuis le repository GitHub :
 
-git clone [lien_du_repo]
+git clone (https://github.com/N0xCam/CEF-mediatheque)
 
 B. Créer un environnement virtuel et l’activer :
 
