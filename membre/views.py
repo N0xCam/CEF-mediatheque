@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from bibliothecaire.models import CD, DVD, Livre, JeuDePlateau
 
 

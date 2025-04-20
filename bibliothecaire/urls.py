@@ -3,10 +3,7 @@ from . import views
 from django.urls import path
 
 from .forms import BibliothecaireLoginForm
-from .views import (
-
-    retourner_emprunt, bibliothecaire_login
-)
+from .views import (retourner_emprunt, bibliothecaire_login)
 
 app_name = "bibliothecaire"
 
@@ -26,7 +23,6 @@ urlpatterns = [
     path('livres/', views.liste_livres, name='liste_livres'),
     path('ajouter/livre/', views.ajouter_livre, name='ajouter_livre'),
     path('cds/', views.liste_cds, name='liste_cds'),
-   # path('cds/ajouter/', views.ajouter_cd, name='ajouter_cd'),
     path('ajouter/cd/', views.ajouter_cd, name='ajouter_cd'),
     path('dvds/', views.liste_dvds, name='liste_dvds'),
     path('ajouter/dvd/', views.ajouter_dvd, name='ajouter_dvd'),
