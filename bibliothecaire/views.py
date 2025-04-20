@@ -3,13 +3,14 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from .models import Membre, Emprunt, Media, Livre, CD, DVD, JeuDePlateau
+from .models import Membre, Emprunt, Livre, CD, DVD, JeuDePlateau
 from .forms import MembreForm, EmpruntForm, BibliothecaireLoginForm, CDForm, DVDForm, LivreForm, JeuForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+#Connexion Bibliothécaire
 def bibliothecaire_login(request):
     form = BibliothecaireLoginForm(request, data=request.POST or None)
     print("Form created.")
@@ -37,27 +38,6 @@ def liste_membres(request):
     membres = Membre.objects.all()
     return render(request, 'liste_membres.html', {'membres': membres})
 
-#TEST
-# Liste des CDs
-def liste_cds(request):
-    cds = CD.objects.all()
-    return render(request, 'medias/cds/liste.html', {'cds': cds})
-
-# Liste des CDs
-def liste_dvds(request):
-    dvds = DVD.objects.all()
-    return render(request, 'medias/dvds/liste.html', {'dvds': dvds})
-
-def liste_livres(request):
-    livres = Livre.objects.all()
-    return render(request, 'medias/livres/liste.html', {'livres': livres})
-
-
-def liste_jeux(request):
-    jeux = JeuDePlateau.objects.all()
-    return render(request, 'medias/jeux/liste.html', {'jeux': jeux})
-
-
 # Ajouter un membre
 @login_required
 def ajouter_membre(request):
@@ -68,35 +48,6 @@ def ajouter_membre(request):
         return redirect('bibliothecaire:liste_membres')
     return render(request, 'ajouter_membre.html', {'form': form})
 
-#TEST
-def ajouter_cd(request):
-    form = CDForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        messages.success(request, "cd créé avec succès !")
-    return render(request, 'ajouter_cd.html',{'form': form})
-
-def ajouter_dvd(request):
-    form = DVDForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        messages.success(request, "DVD créé avec succès !")
-    return render(request, 'ajouter_dvd.html',{'form': form})
-
-def ajouter_livre(request):
-    form = LivreForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        messages.success(request, "Livre créé avec succès !")
-    return render(request, 'ajouter_livre.html',{'form': form})
-
-
-def ajouter_jeu(request):
-    form = JeuForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        messages.success(request, "Jeu créé avec succès !")
-    return render(request, 'ajouter_jeu.html',{'form': form})
 # Modifier un membre
 @login_required
 def modifier_membre(request, membre_id):
@@ -108,7 +59,6 @@ def modifier_membre(request, membre_id):
         return redirect('bibliothecaire:liste_membres')
     return render(request, 'modifier_membres.html', {'form': form})
 
-
 # Supprimer un membre
 @login_required
 def supprimer_membre(request, membre_id):
@@ -117,60 +67,57 @@ def supprimer_membre(request, membre_id):
     messages.success(request, "Membre supprimé avec succès !")
     return redirect('bibliothecaire:liste_membres')
 
-
-# Liste des livres
-class LivreListView(ListView):
-    model = Livre
-    template_name = 'medias/livres/liste.html'
-    context_object_name = 'livres'
-
-
-# Ajouter un livre
-class LivreCreateView(CreateView):
-    model = Livre
-    fields = '__all__'
-    template_name = 'medias/livres/ajouter_cd.html'
-    success_url = reverse_lazy('livres_liste')
-
 # Liste des CDs
-#class CDListView(ListView):
-#    model = CD
-#    template_name = 'medias/cds/liste.html'
-#    context_object_name = 'cds'
+def liste_cds(request):
+    cds = CD.objects.all()
+    return render(request, 'medias/cds/liste.html', {'cds': cds})
 
-class CDCreateView(CreateView):
-    model = CD
-    fields = '__all__'
-    template_name = 'medias/cds/ajouter_cd.html'
-    success_url = reverse_lazy('cds_liste')
+# Ajouter un CD
+def ajouter_cd(request):
+    form = CDForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "cd créé avec succès !")
+    return render(request, 'ajouter_cd.html',{'form': form})
 
-# Liste des DVDS
-class DVDListView(ListView):
-    model = DVD
-    template_name = 'medias/dvds/liste.html'
-    context_object_name = 'dvds'
-
+# Liste des DVDs
+def liste_dvds(request):
+    dvds = DVD.objects.all()
+    return render(request, 'medias/dvds/liste.html', {'dvds': dvds})
 
 # Ajouter un DVD
-class DVDCreateView(CreateView):
-    model = DVD
-    fields = '__all__'
-    template_name = 'medias/dvds/ajouter_cd.html'
-    success_url = reverse_lazy('dvds_liste')
+def ajouter_dvd(request):
+    form = DVDForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "DVD créé avec succès !")
+    return render(request, 'ajouter_dvd.html',{'form': form})
 
-# Liste des Jeux de plateau
-class JeuListView(ListView):
-    model = JeuDePlateau
-    template_name = 'medias/jeux/liste.html'
-    context_object_name = 'jeux'
-
+# Liste des livres
+def liste_livres(request):
+    livres = Livre.objects.all()
+    return render(request, 'medias/livres/liste.html', {'livres': livres})
 
 # Ajouter un livre
-class JeuCreateView(CreateView):
-    model = JeuDePlateau
-    fields = '__all__'
-    template_name = 'medias/jeux/ajouter_cd.html'
-    success_url = reverse_lazy('jeux_liste')
+def ajouter_livre(request):
+    form = LivreForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "Livre créé avec succès !")
+    return render(request, 'ajouter_livre.html',{'form': form})
+
+# Liste des Jeux
+def liste_jeux(request):
+    jeux = JeuDePlateau.objects.all()
+    return render(request, 'medias/jeux/liste.html', {'jeux': jeux})
+
+# Ajouter un jeu
+def ajouter_jeu(request):
+    form = JeuForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "Jeu créé avec succès !")
+    return render(request, 'ajouter_jeu.html',{'form': form})
 
 # Ajouter un emprunt
 class EmpruntCreateView(CreateView):
@@ -186,20 +133,17 @@ class EmpruntCreateView(CreateView):
             form.add_error(None, e.message)
             return self.form_invalid(form)
 
-
 # Liste des emprunts via CBV
 class EmpruntListView(ListView):
     model = Emprunt
     template_name = 'emprunts/emprunt_list.html'
     context_object_name = 'emprunts'
 
-
 # Liste des emprunts via FBV
 @login_required
 def emprunt_liste(request):
     emprunts = Emprunt.objects.all()
     return render(request, 'emprunts/liste.html', {'emprunts': emprunts})
-
 
 # Ajouter un emprunt via FBV
 @login_required
@@ -218,7 +162,6 @@ def emprunt_ajouter(request):
             messages.error(request, "Le formulaire contient des erreurs.")
 
     return render(request, 'emprunts/ajouter.html', {'form': form})
-
 
 # Retourner un emprunt
 @login_required

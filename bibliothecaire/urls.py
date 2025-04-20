@@ -4,13 +4,7 @@ from django.urls import path
 
 from .forms import BibliothecaireLoginForm
 from .views import (
-    LivreListView,
-    LivreCreateView,
 
-    CDCreateView,
-
-    JeuListView,
-    JeuCreateView,
     retourner_emprunt, bibliothecaire_login
 )
 
