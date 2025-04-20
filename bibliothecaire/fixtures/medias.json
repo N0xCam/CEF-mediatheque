@@ -3,108 +3,180 @@
         {
             "id": 12,
             "titre": "The Hunger Games",
-            "disponible": true,
-            "auteur": "Suzanne Collins"
+            "auteur": "Suzanne Collins",
+            "disponible": true
         },
         {
             "id": 13,
             "titre": "22.11.63",
-            "disponible": true,
-            "auteur": "Stephen King"
+            "auteur": "Stephen King",
+            "disponible": true
         },
         {
             "id": 14,
             "titre": "La derni\u00e8re allumette",
-            "disponible": true,
-            "auteur": "Marie Vareille"
+            "auteur": "Marie Vareille",
+            "disponible": true
         },
         {
             "id": 15,
             "titre": "La servante \u00e9carlate",
-            "disponible": true,
-            "auteur": "Margaret Atwood"
+            "auteur": "Margaret Atwood",
+            "disponible": true
         },
         {
             "id": 16,
             "titre": "Deux soeurs pour un roi",
-            "disponible": true,
-            "auteur": "Philippa Gregory"
+            "auteur": "Philippa Gregory",
+            "disponible": true
+        },
+        {
+            "id": 17,
+            "titre": "Harry Potter",
+            "auteur": "JK Rowling",
+            "disponible": true
         }
     ],
     "cds": [
         {
             "id": 1,
+            "artiste": "Imagine Dragons",
             "titre": "Evolve",
-            "disponible": true,
-            "artiste": "Imagine Dragons"
+            "disponible": true
         },
         {
             "id": 6,
-            "titre": "Going To Hell",
-            "disponible": true,
-            "artiste": "The Pretty Reckless"
+            "artiste": "The Pretty Reckless",
+            "titre": "You make me wanna die",
+            "disponible": true
         },
         {
             "id": 7,
+            "artiste": "Joan Jett",
             "titre": "Bad Reputation",
-            "disponible": true,
-            "artiste": "Joan Jett"
-        },
-        {
-            "id": 8,
-            "titre": "Evolve",
-            "disponible": true,
-            "artiste": "Imagine Dragons"
+            "disponible": true
         },
         {
             "id": 9,
+            "artiste": "Imagine Dragons",
             "titre": "Demons",
-            "disponible": true,
-            "artiste": "Imagine Dragons"
+            "disponible": true
         },
         {
             "id": 10,
-            "titre": "Music of the Spheres",
-            "disponible": true,
-            "artiste": "Coldplay"
+            "artiste": "Coldplay",
+            "titre": "We pray",
+            "disponible": true
         },
         {
             "id": 11,
-            "titre": "Hybrid Theory",
-            "disponible": true,
-            "artiste": "Linkin Park"
+            "artiste": "Linkin Park",
+            "titre": "Over each other",
+            "disponible": true
+        },
+        {
+            "id": 12,
+            "artiste": "Coldplay",
+            "titre": "we pray",
+            "disponible": true
+        },
+        {
+            "id": 13,
+            "artiste": "Coldplay",
+            "titre": "we pray",
+            "disponible": true
+        },
+        {
+            "id": 14,
+            "artiste": "Coldplay",
+            "titre": "we pray",
+            "disponible": true
+        },
+        {
+            "id": 15,
+            "artiste": "Ekaterina Shelehova",
+            "titre": "Savage Daughter",
+            "disponible": true
+        },
+        {
+            "id": 16,
+            "artiste": "Ekaterina Shelehova",
+            "titre": "Savage Daughter",
+            "disponible": true
+        },
+        {
+            "id": 17,
+            "artiste": "Linkin Park",
+            "titre": "The Emptiness Machine",
+            "disponible": true
+        },
+        {
+            "id": 18,
+            "artiste": "Disney",
+            "titre": "La Reine des Neiges",
+            "disponible": true
+        },
+        {
+            "id": 19,
+            "artiste": "Disney",
+            "titre": "La Reine des Neiges",
+            "disponible": true
+        },
+        {
+            "id": 20,
+            "artiste": "Disney",
+            "titre": "La Reine des Neiges",
+            "disponible": true
+        },
+        {
+            "id": 21,
+            "artiste": "Disney",
+            "titre": "La Reine des Neiges",
+            "disponible": true
+        },
+        {
+            "id": 22,
+            "artiste": "Alphaville",
+            "titre": "Forever Young",
+            "disponible": true
+        },
+        {
+            "id": 23,
+            "artiste": "Alexandre Astier",
+            "titre": "Kaamelott",
+            "disponible": true
         }
     ],
     "dvds": [
         {
             "id": 1,
-            "titre": "Le voyage de Chihiro",
-            "disponible": false,
-            "realisateur": "Hayao Miyazaki"
+            "titre": "Chihiro",
+            "realisateur": "Hayao Miyazaki",
+            "disponible": false
         },
         {
             "id": 2,
-            "titre": "Mon voisin Totoro",
-            "disponible": false,
-            "realisateur": "Hayao Miyazaki"
+            "titre": "Princesse Mononok\u00e9",
+            "realisateur": "Hayao Miyazaki",
+            "disponible": false
         },
         {
             "id": 3,
-            "titre": "Princesse Monok\u00e9",
-            "disponible": false,
-            "realisateur": "Hayao Miyazaki"
+            "titre": "Mon voisin Totoro",
+            "realisateur": "Hayao Miyazaki",
+            "disponible": false
         },
         {
             "id": 4,
-            "titre": "Le ch\u00e2teau ambulant",
-            "disponible": false,
-            "realisateur": "Hayao Miyazaki"
+            "titre": "Ponyo sur la falaise",
+            "realisateur": "Hayao Miyazaki",
+            "disponible": false
         },
         {
             "id": 5,
-            "titre": "Ponyo sur la falaise",
-            "disponible": false,
-            "realisateur": "Hayao Miyazaki"
+            "titre": "Le gar\u00e7on et le h\u00e9ron",
+            "realisateur": "Hayao Miyazaki",
+            "disponible": false
         }
     ],
     "jeux_de_plateau": [
@@ -132,6 +204,11 @@
             "id": 21,
             "titre": "Le secret de mon p\u00e8re",
             "description": "Jeu narratif de pose d\u2019ouvriers o\u00f9 vous incarnez une fratrie d\u00e9couvrant les inventions de leur p\u00e8re d\u00e9c\u00e9d\u00e9."
+        },
+        {
+            "id": 22,
+            "titre": "Boussanga",
+            "description": "Boussanga est un jeu de plateau et de r\u00e9flexion pour 1 \u00e0 4 joueurs qui peut se jouer en \u00e9quipes, en coop\u00e9ratif, en comp\u00e9titif et m\u00eame en solo."
         }
     ]
 }

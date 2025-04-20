@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from .models import Membre, Emprunt, Media, Livre, CD, DVD, JeuDePlateau
-from .forms import MembreForm, EmpruntForm, BibliothecaireLoginForm
+from .forms import MembreForm, EmpruntForm, BibliothecaireLoginForm, CDForm, DVDForm, LivreForm, JeuForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -14,7 +14,9 @@ def bibliothecaire_login(request):
     if request.user.is_authenticated:
         return redirect('bibliothecaire:dashboard')
 
+    print("POST data:", request.POST) # pour vérifier
     form = BibliothecaireLoginForm(request, data=request.POST or None)
+    print("Form created.")
 
     if request.method == 'POST':
         if form.is_valid():
@@ -45,6 +47,19 @@ def liste_cds(request):
     cds = CD.objects.all()
     return render(request, 'medias/cds/liste.html', {'cds': cds})
 
+# Liste des CDs
+def liste_dvds(request):
+    dvds = DVD.objects.all()
+    return render(request, 'medias/dvds/liste.html', {'dvds': dvds})
+
+def liste_livres(request):
+    livres = Livre.objects.all()
+    return render(request, 'medias/livres/liste.html', {'livres': livres})
+
+
+def liste_jeux(request):
+    jeux = JeuDePlateau.objects.all()
+    return render(request, 'medias/jeux/liste.html', {'jeux': jeux})
 
 
 # Ajouter un membre
@@ -59,14 +74,33 @@ def ajouter_membre(request):
 
 #TEST
 def ajouter_cd(request):
-    form = MembreForm(request.POST or None)
+    form = CDForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "CD créé avec succès !")
-        return redirect('bibliothecaire:liste_membres')
-    return render(request, 'ajouter_cd.html', {'form': form})
+        messages.success(request, "cd créé avec succès !")
+    return render(request, 'ajouter_cd.html',{'form': form})
+
+def ajouter_dvd(request):
+    form = DVDForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "DVD créé avec succès !")
+    return render(request, 'ajouter_dvd.html',{'form': form})
+
+def ajouter_livre(request):
+    form = LivreForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "Livre créé avec succès !")
+    return render(request, 'ajouter_livre.html',{'form': form})
 
 
+def ajouter_jeu(request):
+    form = JeuForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "Jeu créé avec succès !")
+    return render(request, 'ajouter_jeu.html',{'form': form})
 # Modifier un membre
 @login_required
 def modifier_membre(request, membre_id):
@@ -175,13 +209,18 @@ def emprunt_liste(request):
 @login_required
 def emprunt_ajouter(request):
     form = EmpruntForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        try:
-            form.save()
-            messages.success(request, "Emprunt ajouté avec succès !")
-            return redirect('emprunts_liste')
-        except ValueError as e:
-            messages.error(request, str(e))
+
+    if request.method == 'POST':
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, "Emprunt ajouté avec succès !")
+                return redirect('bibliothecaire:emprunts_liste')
+            except ValidationError as e:
+                form.add_error(None, e.message)
+        else:
+            messages.error(request, "Le formulaire contient des erreurs.")
+
     return render(request, 'emprunts/ajouter.html', {'form': form})
 
 
@@ -189,10 +228,14 @@ def emprunt_ajouter(request):
 @login_required
 def retourner_emprunt(request, emprunt_id):
     emprunt = get_object_or_404(Emprunt, id=emprunt_id)
-    if emprunt.date_retour >= timezone.now().date():
-        emprunt.date_retour = timezone.now().date()
+
+    today = timezone.now().date()
+
+    if emprunt.date_retour > today:
+        emprunt.date_retour = today
         emprunt.save()
-        messages.success(request, f"Le média '{emprunt.media}' a été retourné avec succès.")
+        messages.success(request, "L'emprunt a été marqué comme retourné.")
     else:
-        messages.warning(request, "Cet emprunt est déjà retourné.")
-    return redirect('emprunts_liste')
+        messages.info(request, "L'emprunt était déjà expiré ou retourné.")
+
+    return redirect('bibliothecaire:emprunts_liste')

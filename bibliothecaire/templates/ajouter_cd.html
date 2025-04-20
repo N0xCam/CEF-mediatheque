@@ -2,15 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un livre</title>
+    <title>Ajouter un CD</title>
 </head>
 <body>
-    <h1>Ajouter un livre</h1>
+    <h1>Ajouter un CD</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Enregistrer</button>
     </form>
-    <a href="{% url 'bibliothecaire:livres_liste' %}">Retour à la liste</a>
+    <a href="{% url 'bibliothecaire:liste_cds' %}">Retour à la liste</a>
 </body>
 </html>

@@ -16,14 +16,23 @@
         <li> <a href="/bibliothecaire/ajouter_membre/">Ajouter membre </a> </li>
 
         <h3> Les médias </h3>
-    <li><a href="{% url 'bibliothecaire:livres_liste' %}">Voir les livres</a></li>
-    <li><a href="{% url 'bibliothecaire:livre_ajouter' %}">Ajouter un livre</a></li>
-    <li><a href="{% url 'bibliothecaire:cds_liste' %}">Voir les CDs</a></li>
-    <li><a href="{% url 'bibliothecaire:cd_ajouter' %}">Ajouter un CD</a></li>
-    <li><a href="{% url 'bibliothecaire:dvds_liste' %}">Voir les DVDs</a></li>
-    <li><a href="{% url 'bibliothecaire:dvd_ajouter' %}">Ajouter un DVD</a></li>
-    <li><a href="{% url 'bibliothecaire:jeux_liste' %}">Voir les jeux de plateau</a></li>
-    <li><a href="{% url 'bibliothecaire:jeu_ajouter' %}">Ajouter un jeu de plateau</a></li>
+        <h4> Les livres </h4>
+        <li> <a href="/bibliothecaire/livres">Liste des livres</a></li>
+        <li> <a href="/bibliothecaire/ajouter/livre">Ajouter un livre</a></li>
+        <h4> Les CDS </h4>
+        <li> <a href="/bibliothecaire/cds">Liste des CDs</a></li>
+        <li> <a href="/bibliothecaire/ajouter_cd">Ajouter un CD</a></li>
+        <h4> Les DVDS </h4>
+        <li> <a href="/bibliothecaire/dvds">Liste des DVDs</a></li>
+        <li> <a href="/bibliothecaire/ajouter_dvd">Ajouter un DVD</a></li>
+        <h4> Les jeux de plateau </h4>
+        <li> <a href="/bibliothecaire/jeux">Liste des jeux de plateau</a></li>
+        <li> <a href="/bibliothecaire/ajouter_jeux">Ajouter un jeu de plateau</a></li>
+
+        <h3> Les emprunts </h3>
+        <li> <a href="/bibliothecaire/emprunts">Liste des emprunts en cours</a></li>
+        <li> <a href="/bibliothecaire/emprunt/ajouter">Ajouter un emprunt</a></li>
+
 </ul>
 
 

@@ -2,55 +2,48 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Emprunts</title>
+    <title>Liste des emprunts</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container py-4">
-        <h1 class="mb-4">Liste des emprunts</h1>
+<div class="container py-4">
+    <h1 class="mb-4">Liste des emprunts</h1>
 
-        <a href="{% url 'emprunt_ajouter' %}" class="btn btn-primary mb-3">Emprunter un média</a>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-        {% if emprunts %}
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Membre</th>
-                        <th>Média</th>
-                        <th>Date d'emprunt</th>
-                        <th>Date de retour</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for emprunt in emprunts %}
-                        <tr>
-                            <td>{{ emprunt.membre.nom }}</td>
-                            <td>{{ emprunt.media.titre }}</td>
-                            <td>{{ emprunt.date_emprunt }}</td>
-                            <td>{{ emprunt.date_retour }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>Aucun emprunt en cours.</p>
-        {% endif %}
-    </div>
+    <ul class="list-group">
+        {% for emprunt in emprunts %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ emprunt.membre }}</strong> a emprunté :
+                    {% if emprunt.livre %}
+                        <em>{{ emprunt.livre.titre }}</em>
+                    {% elif emprunt.cd %}
+                        <em>{{ emprunt.cd.titre }}</em>
+                    {% elif emprunt.dvd %}
+                        <em>{{ emprunt.dvd.titre }}</em>
+                    {% else %}
+                        <em>(aucun média)</em>
+                    {% endif %}
+                    jusqu'au <strong>{{ emprunt.date_retour }}</strong>
+                </div>
+                <form action="{% url 'bibliothecaire:retour_emprunt' emprunt.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-warning">Rendre</button>
+                </form>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Aucun emprunt pour le moment.</li>
+        {% endfor %}
+    </ul>
 
-{% for emprunt in emprunts %}
-    <p>
-        {{ emprunt.membre }} a emprunté {{ emprunt.media }} jusqu’au {{ emprunt.date_retour }}
-        {% if emprunt.date_retour >= today %}
-            <!-- Bouton de retour -->
-            <form action="{% url 'retour_emprunt' emprunt.id %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">Retourner</button>
-            </form>
-        {% else %}
-            (Retourné)
-        {% endif %}
-    </p>
-{% endfor %}
-
+    <a href="{% url 'bibliothecaire:emprunt_ajouter' %}" class="btn btn-primary mt-4">Ajouter un emprunt</a>
+</div>
 </body>
 </html>

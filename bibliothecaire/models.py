@@ -4,6 +4,8 @@ from django.utils import timezone
 from datetime import timedelta
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.utils.timezone import now
+
 from .utils import exporter_medias_en_json
 from django.core.exceptions import ValidationError
 
@@ -20,6 +22,25 @@ class CD(models.Model):
     artiste = models.CharField(max_length=100, null=True, blank=True)
     titre = models.CharField(max_length=200, null=True, blank=True)
     disponible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f" {self.titre}"
+
+class DVD(models.Model):
+    titre = models.CharField(max_length=100, null=True, blank=True)
+    realisateur = models.CharField(max_length=100, null=True, blank=True)
+    disponible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f" {self.titre}"
+
+class Livre(models.Model):
+    titre = models.CharField(max_length=100, null=True, blank=True)
+    auteur = models.CharField(max_length=100, null=True, blank=True)
+    disponible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f" {self.titre}"
 
 # Modèle Utilisateur
 class Bibliothecaire(models.Model):
@@ -55,8 +76,8 @@ class Media(models.Model):
         return 'inconnu'
 
 
-class Livre(Media):
-    auteur = models.CharField(max_length=100, null=True, blank=True)
+#class Livre(Media):
+#    auteur = models.CharField(max_length=100, null=True, blank=True)
 
 
 
@@ -65,8 +86,8 @@ class Livre(Media):
 
 
 
-class DVD(Media):
-    realisateur = models.CharField(max_length=100, null=True, blank=True)
+#class DVD(Media):
+#    realisateur = models.CharField(max_length=100, null=True, blank=True)
 
 
 
@@ -84,6 +105,7 @@ class Emprunt(models.Model):
     livre = models.ForeignKey(Livre, null=True, blank=True, on_delete=models.CASCADE)
     cd = models.ForeignKey(CD, null=True, blank=True, on_delete=models.CASCADE)
     dvd = models.ForeignKey(DVD, null=True, blank=True, on_delete=models.CASCADE)
+    date_emprunt = models.DateField(default=now)
     date_retour = models.DateField()
 
     def clean(self):

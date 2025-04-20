@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Liste des DVDs</h1>
-    <a href="{% url 'bibliothecaire:dvd_ajouter' %}">Ajouter un DVD</a>
+    <a href="{% url 'bibliothecaire:ajouter_dvd' %}">Ajouter un DVD</a>
     <ul>
         {% for dvd in dvds %}
       <li>{{ dvd.titre }} – {{ dvd.realisateur }}</li>
