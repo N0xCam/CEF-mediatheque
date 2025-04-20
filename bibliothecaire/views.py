@@ -9,19 +9,22 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+import logging
+logger = logging.getLogger(__name__)
 
 #Connexion Bibliothécaire
 def bibliothecaire_login(request):
     form = BibliothecaireLoginForm(request, data=request.POST or None)
-    print("Form created.")
+    logger.info("Formulaire de connexion bibliothécaire créé.")
 
     if request.method == 'POST':
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            logger.info(f"Connexion réussie pour l'utilisateur : {user.username}")
             return redirect('bibliothecaire:dashboard')
         else:
-            messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
+            logger.warning(f"Tentative de connexion échouée. Données reçues : {request.POST}")
 
     return render(request, 'login.html', {'form': form})
 
@@ -76,9 +79,10 @@ def liste_cds(request):
 def ajouter_cd(request):
     form = CDForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
-        form.save()
-        messages.success(request, "cd créé avec succès !")
-    return render(request, 'ajouter_cd.html',{'form': form})
+        cd = form.save()
+        logger.info(f"CD ajouté : {cd} par {request.user}")
+        messages.success(request, "CD créé avec succès !")
+    return render(request, 'ajouter_cd.html', {'form': form})
 
 # Liste des DVDs
 def liste_dvds(request):
@@ -128,8 +132,11 @@ class EmpruntCreateView(CreateView):
 
     def form_valid(self, form):
         try:
-            return super().form_valid(form)
+            response = super().form_valid(form)
+            logger.info(f"Nouvel emprunt ajouté : {form.instance} par {self.request.user}")
+            return response
         except ValidationError as e:
+            logger.error(f"Erreur de validation lors de la création d'emprunt : {e}")
             form.add_error(None, e.message)
             return self.form_invalid(form)
 
@@ -167,14 +174,15 @@ def emprunt_ajouter(request):
 @login_required
 def retourner_emprunt(request, emprunt_id):
     emprunt = get_object_or_404(Emprunt, id=emprunt_id)
-
     today = timezone.now().date()
 
     if emprunt.date_retour > today:
         emprunt.date_retour = today
         emprunt.save()
+        logger.info(f"Emprunt retourné : {emprunt} par {request.user}")
         messages.success(request, "L'emprunt a été marqué comme retourné.")
     else:
+        logger.info(f"Tentative de retour d’un emprunt déjà expiré ou retourné : {emprunt}")
         messages.info(request, "L'emprunt était déjà expiré ou retourné.")
 
     return redirect('bibliothecaire:emprunts_liste')
