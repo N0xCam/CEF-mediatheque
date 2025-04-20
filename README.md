@@ -1,3 +1,6 @@
+Username : admin
+Mot de passe : Books4ever
+
 Ce projet de médiathèque a représenté un vrai défi, mais aussi une belle opportunité d’apprentissage. Le code de départ proposait une structure très simple en Python, avec quelques classes et un affichage console. J’ai choisi de le réinterpréter entièrement sous Django afin d’en faire une application web fonctionnelle et complète.
 Ce projet m’a demandé beaucoup de temps et d’implication, mais il m’a permis de mieux comprendre Django, de mettre en pratique la structuration d’un projet web et de gagner en autonomie dans la résolution de problèmes techniques.
 Je suis fière d’avoir mené ce projet à terme de manière autonome, et même si cela n’a pas été de tout repos, j’en ressors avec de nouvelles compétences solides.
