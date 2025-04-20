@@ -1,0 +1,23 @@
+<h1>Tous les médias et jeux de plateau</h1>
+
+{% for item in items %}
+    <div>
+        <h2>{{ item.titre }}</h2>
+
+        {% if item.get_type == "Jeu de Plateau" %}
+            <p>Type: Jeu de Plateau</p>
+        {% elif item.get_type == "Media" %}
+            <p>Type: Média</p>
+        {% endif %}
+
+        <p>{{ item.description }}</p>
+        <p>{{ item.auteur }}</p>
+        <p>{{ item.date_publication }}</p>
+
+        {% if item.emprunte %}
+            <button>Retourner</button>
+        {% else %}
+            <button>Emprunter</button>
+        {% endif %}
+    </div>
+{% endfor %}

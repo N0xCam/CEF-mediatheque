@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Jeux de plateaux </title>
+</head>
+<body>
+    <h1>Liste des Jeux de plateaux</h1>
+    <a href="{% url 'bibliothecaire:ajouter_jeu' %}">Ajouter un Jeu de plateau</a>
+    <ul>
+        {% for jeu in jeux %}
+            <li>{{ jeu.titre }} – {{ jeu.description }}</li>
+        {% empty %}
+            <li>Aucun livre enregistré.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

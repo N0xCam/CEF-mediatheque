@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Médias</title>
+</head>
+<body>
+
+<h2> Liste des médias </h2>
+
+
+<h3> Les livres </h3>
+<ul>
+    {% for livre in livres %}
+        <li>{{ livre.titre }} - {{ livre.auteur }}</li>
+    {% empty %}
+        <li> Aucun livre disponible. </li>
+    {% endfor %}
+</ul>
+
+<h3> Les CDs </h3>
+<ul>
+    {% for cd in cds %}
+        <li>{{ cd.titre }} - {{ cd.artiste }}</li>
+    {% empty %}
+        <li> Aucun CD disponible. </li>
+    {% endfor %}
+</ul>
+
+<h3> Les DVDs </h3>
+<ul>
+    {% for dvd in dvds %}
+        <li>{{ dvd.titre }} - {{ dvd.realisateur }}</li>
+    {% empty %}
+        <li> Aucun DVD disponible. </li>
+    {% endfor %}
+</ul>
+
+<h3> Les jeux de plateau </h3>
+<ul>
+    {% for jeu in jeux %}
+        <li>{{ jeu.titre }} - {{ jeu.description }}</li>
+    {% empty %}
+        <li> Aucun jeu disponible. </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

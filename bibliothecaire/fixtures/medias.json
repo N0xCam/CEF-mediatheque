@@ -1,0 +1,13 @@
+{
+    "livres": [],
+    "cds": [
+        {
+            "id": 1,
+            "artiste": "Artiste Test",
+            "titre": "Test CD",
+            "disponible": true
+        }
+    ],
+    "dvds": [],
+    "jeux_de_plateau": []
+}

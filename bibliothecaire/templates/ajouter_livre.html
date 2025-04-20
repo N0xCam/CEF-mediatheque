@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un livre</title>
+</head>
+<body>
+    <h1>Ajouter un livre</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enregistrer</button>
+    </form>
+    <a href="{% url 'bibliothecaire:liste_livres' %}">Retour à la liste</a>
+</body>
+</html>

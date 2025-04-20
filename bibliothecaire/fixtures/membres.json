@@ -1,0 +1,27 @@
+[
+  {
+    "pk": 1,
+    "nom": "Hermione Granegr",
+    "email": "hermione@example.com"
+  },
+  {
+    "pk": 2,
+    "nom": "Luna Lovegood",
+    "email": "luna@example.com"
+  },
+  {
+    "pk": 3,
+    "nom": "Rowena Serdaigle",
+    "email": "rowena@example.com"
+  },
+  {
+    "pk": 4,
+    "nom": "Anya Forger",
+    "email": "anya@example.com"
+  },
+  {
+    "pk": 5,
+    "nom": "Loid Forger",
+    "email": "loid@example.com"
+  }
+]
