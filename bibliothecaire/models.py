@@ -5,7 +5,6 @@ from datetime import timedelta
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils.timezone import now
-
 from .utils import exporter_medias_en_json
 from django.core.exceptions import ValidationError
 
@@ -18,6 +17,7 @@ class Membre(models.Model):
     def __str__(self):
         return f" {self.nom}"
 
+# Modèle CD
 class CD(models.Model):
     artiste = models.CharField(max_length=100, null=True, blank=True)
     titre = models.CharField(max_length=200, null=True, blank=True)
@@ -26,6 +26,7 @@ class CD(models.Model):
     def __str__(self):
         return f" {self.titre}"
 
+# Modèle DVD
 class DVD(models.Model):
     titre = models.CharField(max_length=100, null=True, blank=True)
     realisateur = models.CharField(max_length=100, null=True, blank=True)
@@ -34,6 +35,7 @@ class DVD(models.Model):
     def __str__(self):
         return f" {self.titre}"
 
+# Modèle Livre
 class Livre(models.Model):
     titre = models.CharField(max_length=100, null=True, blank=True)
     auteur = models.CharField(max_length=100, null=True, blank=True)
@@ -41,6 +43,14 @@ class Livre(models.Model):
 
     def __str__(self):
         return f" {self.titre}"
+
+# Modèle Jeu de plateau
+class JeuDePlateau(models.Model):
+    titre = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.titre
 
 # Modèle Utilisateur
 class Bibliothecaire(models.Model):
@@ -54,8 +64,7 @@ class Bibliothecaire(models.Model):
     def create(cls, username, password, email=""):
         Bibliothecaire.objects.create_user(username, email, password)
 
-#Modèles Médias
-
+#Modèle Médias
 class Media(models.Model):
     titre = models.CharField(max_length=200, null=True, blank=True)
     disponible = models.BooleanField(default=True)
@@ -75,31 +84,7 @@ class Media(models.Model):
             return 'dvd'
         return 'inconnu'
 
-
-#class Livre(Media):
-#    auteur = models.CharField(max_length=100, null=True, blank=True)
-
-
-
-#class CD(Media):
- #   artiste = models.CharField(max_length=100, null=True, blank=True)
-
-
-
-#class DVD(Media):
-#    realisateur = models.CharField(max_length=100, null=True, blank=True)
-
-
-
-class JeuDePlateau(models.Model):
-    titre = models.CharField(max_length=200, null=True, blank=True)
-    description = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.titre
-
 #Modèles emprunt
-
 class Emprunt(models.Model):
     membre = models.ForeignKey(Membre, on_delete=models.CASCADE)
     livre = models.ForeignKey(Livre, null=True, blank=True, on_delete=models.CASCADE)
