@@ -19,7 +19,7 @@ app_name = "bibliothecaire"
 urlpatterns = [
     #Bibliothécaire : identification + tableau de bord
     path('dashboard/', views.dashboard, name="dashboard"),
-
+    path('login/', bibliothecaire_login,name="login"),
 
 
     #Gestion des membres

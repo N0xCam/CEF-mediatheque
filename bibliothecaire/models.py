@@ -44,7 +44,7 @@ class Livre(models.Model):
 
 # Modèle Utilisateur
 class Bibliothecaire(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE),
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     related_name='bibliothecaire_user'
 
     def __str__(self):
